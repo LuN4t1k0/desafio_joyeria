@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { getAllJewels } = require("./controller/inventory");
+const { formatHATEOAS } = require('./helpers/hateoas')
+
 require("dotenv").config({ path: "./.env" });
 
 const PORT = process.env.PORT || 3001;
@@ -13,8 +15,11 @@ app.use(express.json());
 app.get("/joyas", async (req, res) => {
   try {
     const queryStrings = req.query;
+
     const jewels = await getAllJewels(queryStrings);
-    res.json(jewels);
+    
+    const HATEOAS = await formatHATEOAS(jewels, queryStrings)
+    res.status(200).json(HATEOAS);
   } catch (error) {}
 });
 
@@ -23,6 +28,12 @@ app.get("/joyas/filtro", async (req, res) => {
   try {
   } catch (error) {}
   res.json();
+});
+
+app.get("*", (req, res) => {
+  res
+    .status(404)
+    .json({ message: "the path you are trying to access does not exist" });
 });
 
 app.listen(PORT, console.log(`servidor corriendo en el Puerto : ${PORT}`));
