@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { getAllJewels } = require("./controller/inventory");
+const { getAllJewels, getFilteredJewels } = require("./controller/inventory");
 const { formatHATEOAS } = require("./helpers/hateoas");
 
 require("dotenv").config({ path: "./.env" });
@@ -15,16 +15,16 @@ app.use(express.json());
 app.get("/joyas", async (req, res) => {
   try {
     const queryStrings = req.query;
-
     const jewels = await getAllJewels(queryStrings);
-
     const HATEOAS = await formatHATEOAS(jewels);
     res.status(200).json(HATEOAS);
   } catch (error) {}
 });
 
-app.get("/joyas/filtro", async (req, res) => {
-  //devuelve las joyas filtradas por precio min max, categoria y metal
+app.get("/joyas/filtros", async (req, res) => {
+  const queryStrings = req.query;
+  const jewels = await getFilteredJewels(queryStrings);
+  res.json(jewels);
   try {
   } catch (error) {}
   res.json();

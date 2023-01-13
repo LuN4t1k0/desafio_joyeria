@@ -17,11 +17,37 @@ const getAllJewels = async ({ limits = 6, page = 1, order_by = "id_ASC" }) => {
 };
 
 const getFilteredJewels = async ({
-  price_min,
-  price_max,
-  category,
+  precio_max,
+  precio_min,
+  categoria,
   metal,
-}) => {};
+}) => {
+  let filters = [];
+  let values = [];
+  if (precio_max) {
+    filters.push("precio <= $1");
+    values.push(precio_max);
+  }
+  if (precio_min) {
+    filters.push("precio >= $2");
+    values.push(precio_min);
+  }
+  if (categoria) {
+    filters.push("categoria = $3");
+    values.push(categoria);
+  }
+  if (metal) {
+    filters.push("metal = $4");
+    values.push(metal);
+  }
+  let query = "SELECT * FROM inventario";
+  if (filters.length > 0) {
+    filters = filters.join(" AND ");
+    query += ` WHERE ${filters}`;
+  }
+  const { rows: inventory } = await pool.query(query, values);
+  return inventory;
+};
 
 module.exports = {
   getAllJewels,
