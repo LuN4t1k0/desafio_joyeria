@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const { getAllJewels } = require("./controller/inventory");
-const { formatHATEOAS } = require('./helpers/hateoas')
+const { formatHATEOAS } = require("./helpers/hateoas");
 
 require("dotenv").config({ path: "./.env" });
 
@@ -17,8 +17,8 @@ app.get("/joyas", async (req, res) => {
     const queryStrings = req.query;
 
     const jewels = await getAllJewels(queryStrings);
-    
-    const HATEOAS = await formatHATEOAS(jewels, queryStrings)
+
+    const HATEOAS = await formatHATEOAS(jewels);
     res.status(200).json(HATEOAS);
   } catch (error) {}
 });
