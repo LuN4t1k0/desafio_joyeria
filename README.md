@@ -6,7 +6,7 @@
 
 # Desafío - Tienda de Joyas
 
-_Proyecto desarrollado para el desafío quinto en grupo de diseño avanzado de API REST en el Modulo de Backend con Node y Express (G21) de la Academia Desafío Latam.
+_Proyecto desarrollado para el desafío quinto en grupo de diseño avanzado de API REST en el Modulo de Backend con Node y Express (G21) de la Academia Desafío Latam._
 
 _La tienda de joyas My Precious Spa necesita cambiar su aplicación de escritorio por una moderna y dinámica. Para realizar esta tarea, contactó a un desarrollador Full Stack Developer que desarrolle la API REST de una aplicación cliente para satisfacer las necesidades puntuales de sus usuarios de una forma eficiente, mantenible y eficaz._
 
