@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const { getAllJewels } = require("./controller/Inventory");
+const { getAllJewels } = require("./controller/inventory");
 require("dotenv").config({ path: "./.env" });
 
 const PORT = process.env.PORT || 3001;

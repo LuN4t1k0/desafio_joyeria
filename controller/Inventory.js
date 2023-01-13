@@ -1,5 +1,5 @@
 const pool = require("../config/pool");
-const format = requiere("pg-format");
+const format = require("pg-format");
 
 const getAllJewels = async ({ limits = 6, page = 1, order_by = "id_ASC" }) => {
   const [field, order] = order_by.split("_");
