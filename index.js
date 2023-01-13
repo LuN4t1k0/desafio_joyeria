@@ -18,16 +18,18 @@ app.get("/joyas", async (req, res) => {
     const jewels = await getAllJewels(queryStrings);
     const HATEOAS = await formatHATEOAS(jewels);
     res.status(200).json(HATEOAS);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({ message: "an error occurred in the search " });
+  }
 });
 
 app.get("/joyas/filtros", async (req, res) => {
   const queryStrings = req.query;
   const jewels = await getFilteredJewels(queryStrings);
-  res.json(jewels);
+  res.status(200).json(jewels);
   try {
   } catch (error) {}
-  res.json();
+  res.status(500).json({ message: "an error occurred in the search " });
 });
 
 app.get("*", (req, res) => {
